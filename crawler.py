@@ -164,7 +164,8 @@ for e in answers:
         # Fetch the URL to find the answer
         log_if_v('Downloading answer from URL %s' % url)
         try:
-            page_html = urllib.request.urlopen(url).read()
+            page_html = urllib.request.urlopen(url[0:22]+urllib.parse.quote(url[22:])).read()
+            # you need to encode special characters. Plenty of URLs with special chars.
             with open(filename, 'wb') as f:
                 f.write(page_html)
         except urllib.error.URLError as error:
